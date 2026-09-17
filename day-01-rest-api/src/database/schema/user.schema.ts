@@ -1,4 +1,4 @@
-import {pgTable, uuid, varchar, timestamp} from 'drizzle-orm/pg-core';
+import {pgTable, uuid, varchar, timestamp, text} from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
 
@@ -7,6 +7,8 @@ export const users = pgTable('users', {
     name : varchar('name', {length : 255}).notNull(),
 
     email : varchar('email', {length : 255}).unique().notNull(),
+
+    hashPassword : text("hash_password").notNull(),
 
     createdAt : timestamp('created_at', {withTimezone : true}).defaultNow()
 

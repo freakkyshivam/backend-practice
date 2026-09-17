@@ -1,5 +1,10 @@
-import {pgTable, uuid, text, timestamp} from 'drizzle-orm/pg-core'
+import {pgTable, uuid, text, timestamp, varchar,pgEnum} from 'drizzle-orm/pg-core'
 import users from './user.schema.js'
+
+export const taskStatusEnum = pgEnum("task_status_enum",[
+    'pending',
+    'completed'
+])
 
 export const taskSchema = pgTable('tasks',{
     id : uuid().primaryKey().defaultRandom().unique(),
@@ -8,11 +13,13 @@ export const taskSchema = pgTable('tasks',{
 
     title : text("task_title").notNull(),
 
-    description : text("task_description").notNull(),
+    status : taskStatusEnum('task_status').default('pending').notNull(),
+
+    description : text("task_description"),
 
     updatedAt : timestamp("updated_at", {withTimezone : true}).$onUpdate(()=> new Date()),
 
-    creadtedAt : timestamp("created_at", {withTimezone : true}).defaultNow()
+    createdAt : timestamp("created_at", {withTimezone : true}).defaultNow()
 })
 
 
