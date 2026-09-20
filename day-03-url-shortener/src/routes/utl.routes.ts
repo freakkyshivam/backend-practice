@@ -7,7 +7,7 @@ const router = express.Router();
 const urlController = new UrlController(urlService);
 
 router.post('/urls', urlController.createShortUrl)
-router.get('/:shortCode', urlController.redirectToOriginalUrl)
 router.get('/urls/:shortCode', urlController.getUrlDetails)
+router.get('/:shortCode', urlController.redirectToOriginalUrl)
 
 export default router;
