@@ -1,68 +1,191 @@
-# Day 2: File Upload Service 📁
+# Day 02 - File Upload Service
 
-## 🎯 Main Goal
+## 🎯 Goal
 
-Ek backend banana hai jisme user file upload, retrieve aur delete kar sake.
+Build a backend file upload service.
 
-### APIs
-Method	Endpoint	Purpose
-- POST	/files/upload	File upload
-- GET	/files/:filename	File retrieve/download
-- DELETE	/files/:filename	File delete
+Main flow:
 
-# Requirements
-
-## 1. Upload
-
-- POST /files/upload
-
-Request:
-
+```text
+Upload
+  ↓
+Validate
+  ↓
+Save
+  ↓
+Retrieve
+  ↓
+Delete
 ```
+
+## 🧱 Tech Stack
+
+- Node.js
+- Express.js
+- TypeScript
+- Multer
+- Node.js File System (`fs`)
+
+PostgreSQL/Drizzle is **not required** for this task.
+
+## 📌 Features
+
+### 1. Upload File
+
+`POST /files`
+
+Use:
+
+```text
 multipart/form-data
-file: <actual file>
 ```
 
-Implement:
+Field name:
 
-Single file upload
-uploads/ directory mein save karo
-Agar uploads/ exist nahi karti, create karo
-Successful upload par appropriate response return karo
+```text
+file
+```
+
+Requirements:
+- Accept a file
+- Validate file type
+- Validate file size
+- Generate a unique filename
+- Save file to local storage
+- Return file information
 
 Example response:
 
-```
+```json
 {
   "message": "File uploaded successfully",
-  "filename": "example.pdf"
+  "filename": "a8f92c1d.jpg"
 }
 ```
-## 2. File Validation
 
-At least:
+### 2. File Validation
 
- - File size limit
-- Allowed file types
+Allow:
 
+```text
+.jpg
+.jpeg
+.png
+.pdf
+```
 
-  * Images: jpg, jpeg, png
-  * Documents: pdf
+Maximum file size:
 
-Invalid file par proper 4xx response.
+```text
+2 MB
+```
 
-## 3. Retrieve
-- GET /files/example.pdf
+Reject:
+- Unsupported extensions
+- Files larger than 2 MB
 
-Server ko file return karni hai.
+### 3. Unique Filename
 
-File exist nahi karti: 404
+Do not directly store the original filename.
 
-## 4. Delete
-- DELETE /files/example.pdf
+Bad:
+```text
+profile.jpg
+```
 
-File delete karo.
+Better:
+```text
+a8f92c1d.jpg
+```
 
-File nahi mili: 404
+Generate a unique filename while preserving the original extension.
 
-Success: 200
+### 4. Get File
+
+`GET /files/:filename`
+
+Requirements:
+- Check whether the file exists
+- Return the file if it exists
+- Return 404 if it doesn't exist
+
+### 5. Delete File
+
+`DELETE /files/:filename`
+
+Requirements:
+- Check if file exists
+- Delete the file
+- Return success response
+- Return 404 if file doesn't exist
+
+## 📁 Storage Structure
+
+```text
+uploads/
+├── a8f92c1d.jpg
+├── 91ac72de.png
+└── 72bd91fa.pdf
+```
+
+Do not commit uploaded files to Git.
+
+Add:
+
+```text
+uploads/
+```
+
+to `.gitignore`.
+
+ 
+## 🧠 Concepts to Learn
+
+Focus only on:
+1. `multipart/form-data`
+2. Multer
+3. File validation
+4. Node.js `fs`
+5. File paths using `path`
+6. HTTP file responses
+
+ 
+## 🔐 Security Considerations
+
+Understand the basic risks:
+- Don't trust the original filename
+- Don't allow arbitrary file types
+- Limit file size
+- Generate unique filenames
+- Don't expose sensitive server paths
+
+Advanced security is **not required yet**.
+
+## 🚫 Do NOT Add
+
+- AWS S3
+- Cloudinary
+- Firebase Storage
+- Image compression
+- Image resizing
+- Virus scanning
+- Authentication
+- Database metadata
+- Presigned URLs
+- CDN
+- Background processing
+
+## 🎤 Interview Questions
+
+1. What is `multipart/form-data`?
+2. Why can't normal JSON upload a file?
+3. What is Multer?
+4. What is `diskStorage`?
+5. Why generate a unique filename?
+6. How do you validate file size?
+7. How do you validate file type?
+8. What is the difference between `fs` and `fs.promises`?
+9. Why use `path.join()`?
+10. What happens when a file doesn't exist?
+
+ 
