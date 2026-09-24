@@ -1,5 +1,5 @@
 import type { SearchRepository } from "../repositories/search.repository.js";
-import type { ProductRes } from "../domain/types/search.types.js";
+import type { ProductRes, ProductsTypes } from "../domain/types/search.types.js";
 
 export class SearchService{
     constructor(
@@ -26,23 +26,27 @@ export class SearchService{
             maxPrice ?: string,
             page ?: number,
             limit ?: number
-        ):Promise<ProductRes[] | null>{
-
-            console.log(typeof(page));
-            console.log(typeof(limit));
-            
-
+        ):Promise<ProductRes | null>{
+ 
             try {
-                const products = await this
+                const result = await this
             .searchRepository
             .getProducts(
                 search,
                 category,
                 minPrice,
-                maxPrice
+                maxPrice,
+                page,
+                limit
             )
 
-            return products;
+            if(!result) {
+                return null;
+            }
+
+            const {products, meta} = result;
+
+            return {products, meta};
             } catch (err) {
                 throw err;
             }

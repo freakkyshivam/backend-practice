@@ -1,5 +1,5 @@
 
-import type { ProductRes } from "../domain/types/search.types.js"
+import type { ProductRes, ProductsTypes } from "../domain/types/search.types.js"
 
 export interface SearchRepository{
 
@@ -8,7 +8,7 @@ export interface SearchRepository{
         description : string,
         category : string,
         price : string
-    ):Promise<ProductRes | null>
+    ):Promise<ProductsTypes | null>
 
     getProducts(
         search ?:string,
@@ -17,5 +17,5 @@ export interface SearchRepository{
         maxPrice ?: string,
         page ?: number,
         limit ?: number
-    ):Promise<ProductRes[] | null>
+    ):Promise<ProductRes | null>
 }

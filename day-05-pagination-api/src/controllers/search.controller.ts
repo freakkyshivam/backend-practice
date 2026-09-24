@@ -45,15 +45,7 @@ export class SearchController{
         try {
             const {search, category, minPrice, maxPrice,page, limit} = req.query;
 
-            console.log(search);
-            console.log(category);
-            console.log(minPrice);
-            console.log(maxPrice);
-            console.log(page);
-            console.log(limit);
-            
-
-            const products = await this.searchService.getProducts(
+            const result = await this.searchService.getProducts(
                 search as string,
                 category as string,
                 minPrice as string,
@@ -62,7 +54,7 @@ export class SearchController{
                 Number(limit)
             )
 
-            if(!products || products.length === 0){
+            if(!result){
                 return res.status(404).json({
                     success : false,
                     msg : "No product found",
@@ -70,10 +62,13 @@ export class SearchController{
                 })
             }
 
+            const {products, meta} = result;
+
             return res.status(200).json({
                 success : true,
                 msg : "Products found",
-                data : products
+                data : products,
+                meta
             })
         } catch (err) {
             return res.status(500).json({
