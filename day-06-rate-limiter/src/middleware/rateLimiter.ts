@@ -7,7 +7,7 @@ interface LimiterI {
 
 const limiter = new Map<string, LimiterI>();
 
-export const rateLimiterMiddleware = async (
+export const rateLimiterMiddleware =  (
   req: Request,
   res: Response,
   next: NextFunction,

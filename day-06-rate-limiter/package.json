@@ -1,5 +1,5 @@
 {
-  "name": "day-01-rest-api",
+  "name": "day-06-ratelimiter-api",
   "version": "1.0.0",
   "description": "",
   "main": "server.ts",

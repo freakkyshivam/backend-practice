@@ -197,34 +197,8 @@ day-06-rate-limiter/
 You can change the structure if your architecture requires it.
 
 ---
-
-## Testing Checklist
-
-### Basic Rate Limiting
-
-- [ ] First request succeeds
-- [ ] Requests 2–5 succeed
-- [ ] Sixth request returns `429`
-- [ ] Counter resets after the time window expires
-
-### Client Isolation
-
-- [ ] Different clients have independent counters
-- [ ] One client's requests do not affect another client's limit
-
-### Middleware
-
-- [ ] Middleware runs before the protected route
-- [ ] Allowed requests reach the controller
-- [ ] Blocked requests do not reach the controller
-
-### Edge Cases
-
-- [ ] Client has no existing record
-- [ ] Existing window has expired
-- [ ] Request arrives around the window boundary
-
----
+ 
+  
 
 ## What You Should Learn
 
@@ -272,46 +246,6 @@ Do not solve it with Redis yet.
 
 ---
 
-## Do Not Add
-
-Keep the scope focused.
-
-Do **not** add:
-
-- Redis
-- Distributed rate limiting
-- Token Bucket
-- Sliding Window
-- API keys
-- Authentication
-- Advanced throttling
-- Load balancing
-- Microservices
-- Production deployment
-- Complex monitoring
-- Rate-limit dashboards
-
-Those are separate concepts.
-
----
-
-## Completion Criteria
-
-Day 06 is complete when:
-
-- [ ] Rate limiter middleware works
-- [ ] Client is identified by IP
-- [ ] Request count is tracked
-- [ ] Fixed time window works
-- [ ] Maximum request limit works
-- [ ] Excess requests return HTTP 429
-- [ ] Counter resets after the window expires
-- [ ] Different clients have independent counters
-- [ ] Middleware is reusable
-- [ ] You understand the in-memory limitation
-
----
-
 ## Interview Questions
 
 After completing the implementation, be able to answer:
@@ -327,18 +261,4 @@ After completing the implementation, be able to answer:
 
 ---
 
-## Scope Rule
-
-This is **one independent project**.
-
-```text
-Day 06
-   ↓
-Rate Limiter
-   ↓
-Fixed Window + Express Middleware
-```
-
-Do not turn this into a distributed production rate-limiting system.
-
-Finish this project and move on to Day 07.
+ 
