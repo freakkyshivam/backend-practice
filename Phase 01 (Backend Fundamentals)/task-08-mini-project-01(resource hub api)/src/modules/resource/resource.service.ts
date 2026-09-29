@@ -1,4 +1,4 @@
-import type { ResourceRepository } from "../resource/resource.repository.js";
+import type { ResourceRepository } from "./resource.repository.js";
 import type { ResourceResponseType, ResourceType, ResponsesType } from "./resource.type.js";
 
 export class ResourceServie {
