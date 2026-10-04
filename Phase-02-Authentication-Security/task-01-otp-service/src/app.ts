@@ -13,7 +13,7 @@ app.get('/', (_req, res) => {
   res.json({ msg: 'Server is running' });
 });
 
-app.use('/api', otpRouter)
+app.use('/api/otp', otpRouter)
 
 app.use(errorHandler);
 export default app;
