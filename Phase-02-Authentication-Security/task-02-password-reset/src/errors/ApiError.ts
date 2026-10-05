@@ -1,7 +1,7 @@
 
 export class ApiError extends Error{
 
-    statusCode : Number
+    statusCode : number
     isOperational : boolean
 
     constructor(

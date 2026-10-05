@@ -14,7 +14,7 @@ export class PasswordResetService{
 
     generateOtp = async(email : string) : Promise<string> =>{
 
-        const user = this
+        const user = await this
         .userRepository.getUserByEmail(email);
 
         if(!user){
