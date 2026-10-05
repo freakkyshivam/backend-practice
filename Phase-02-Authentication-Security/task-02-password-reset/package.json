@@ -1,0 +1,36 @@
+{
+  "name": "task-02-password-reset",
+  "version": "1.0.0",
+  "description": "Build a secure password reset system using the OTP Service implemented in Task 01.",
+  "license": "ISC",
+  "author": "Shivam Chaudhary",
+  "type": "module",
+  "main": "server.ts",
+  "scripts": {
+    "dev": "tsx --watch src/server.ts",
+    "db:push": "npx drizzle-kit push",
+    "db:studio": "npx drizzle-kit studio",
+    "db:generate": "npx drizzle-kit generate",
+    "db:migrate": "npx drizzle-kit migrate"
+  },
+  "dependencies": {
+    "argon2": "^0.45.1",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.5",
+    "drizzle-orm": "^1.0.0-rc.4",
+    "express": "^5.2.1",
+    "ioredis": "^6.0.0",
+    "pg": "^8.23.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.4",
+    "@types/pg": "^8.23.1",
+    "@types/typescript": "^0.4.29",
+    "drizzle-kit": "^1.0.0-rc.4",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
