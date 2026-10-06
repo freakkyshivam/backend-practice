@@ -32,13 +32,13 @@ export class RedisOtpRepository implements RedisOtpInterface {
       const count = await redis.incr(attemptKey);
 
       if (count > 5) {
+        await redis.del(redisKey, attemptKey);
         throw new ApiError("Too many attempts", 429);
       }
 
       throw new ApiError("Wrong OTP", 400);
     }
 
-    await redis.del(redisKey, attemptKey);
 
     return true;
   }

@@ -16,8 +16,8 @@ export const rateLimiter = async (
       });
     }
 
-    const windowSize = 60;  
-    const maxRequests = 100;
+    const windowSize = 15 * 60;  
+    const maxRequests = 5;
 
     const key = `rate-limit:${ip}`;
  

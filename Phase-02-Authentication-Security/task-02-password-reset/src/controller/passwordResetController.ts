@@ -21,8 +21,10 @@ export class PasswordResetController {
     }
     const { email } = validationResult.data;
 
-    await this.passwordResetService.generateOtp(email);
+    const otp = await this.passwordResetService.generateOtp(email);
 
+    console.log(otp);
+    
     return res.status(200).json({
       success: true,
       message: "If an account exists, password reset otp have been sent.",
