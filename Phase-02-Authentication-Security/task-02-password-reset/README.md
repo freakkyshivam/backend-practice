@@ -178,20 +178,20 @@ You can adjust this structure according to your existing architecture.
 
 Test the following scenarios:
 
-- [ ] Request password reset with valid email.
-- [ ] Request password reset with unknown email.
-- [ ] Verify generic responses to prevent account enumeration.
-- [ ] Reset password with correct OTP.
-- [ ] Reset password with incorrect OTP.
-- [ ] Reset password with expired OTP.
-- [ ] Attempt OTP reuse.
-- [ ] Attempt reset with weak password.
-- [ ] Attempt reset with same old password.
-- [ ] Test rate limiting.
-- [ ] Verify password is stored as an Argon2 hash.
-- [ ] Verify old password no longer works after reset.
-- [ ] Test Redis/database failure handling.
-- [ ] Test concurrent reset requests.
+- [x] Request password reset with valid email.
+- [x] Request password reset with unknown email.
+- [x] Verify generic responses to prevent account enumeration.
+- [x] Reset password with correct OTP.
+- [x] Reset password with incorrect OTP.
+- [x] Reset password with expired OTP.
+- [x] Attempt OTP reuse.
+- [x] Attempt reset with weak password.
+- [x] Attempt reset with same old password.
+- [x] Test rate limiting.
+- [x] Verify password is stored as an Argon2 hash.
+- [x] Verify old password no longer works after reset.
+- [x] Test Redis/database failure handling.
+- [x] Test concurrent reset requests.
 
 ### 8. Code Quality Requirements
 
@@ -226,3 +226,7 @@ The task will be considered complete when:
 7. All required tests pass.
 
 **Important:** Do not implement JWT authentication, OAuth, refresh tokens, or session management in this task. Keep the scope limited to password reset.
+
+**IMPORTANT:** OTP is logged only for local development/testing.
+Production implementation should deliver OTP through a notification provider
+and must never log OTP values.
