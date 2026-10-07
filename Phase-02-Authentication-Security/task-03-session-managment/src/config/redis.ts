@@ -6,3 +6,13 @@ export const redis = new Redis({
     port : env.redis.port,
     password : env.redis.password
 })
+
+
+redis.on('connect', ()=>{
+    console.log('Redis connected');
+})
+
+redis.on('error', (err)=>{
+    console.log("Redis connection error ", err);
+    
+})
