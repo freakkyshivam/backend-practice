@@ -523,6 +523,77 @@ You may adapt this structure to your existing architecture.
 
 ---
 
+# Logging Requirement
+
+Logging is a mandatory part of this task and should be implemented using **Pino**.
+
+## Requirements
+
+- Use structured logging instead of scattered `console.log()` statements.
+- Create a centralized logger configuration.
+- Support appropriate log levels:
+  - `info`
+  - `warn`
+  - `error`
+- Log important application events such as:
+  - Successful login
+  - Failed authentication
+  - Session creation
+  - Session logout
+  - Logout-all
+  - Session refresh
+  - Invalid/expired session attempts
+  - Redis connection/errors
+  - Unexpected application errors
+- Use structured metadata where useful, such as `userId`, operation name, or error information.
+- Keep development logs readable.
+- Use structured JSON logs for production.
+
+## Sensitive Data
+
+The logger must never expose sensitive authentication information.
+
+Never log:
+
+- Passwords
+- Password hashes
+- OTPs
+- Session tokens
+- Authorization headers
+- Cookies
+- Redis credentials
+- Database credentials
+- API keys
+- Secrets
+
+Configure Pino redaction where appropriate to prevent accidental leakage.
+
+## Logging Example
+
+```ts
+logger.info({ userId }, "User logged in");
+
+logger.info({ userId }, "Session created");
+
+logger.warn({ userId }, "Invalid session attempt");
+
+logger.error({ err }, "Redis operation failed");
+```
+
+Do not use:
+
+```ts
+console.log(password);
+console.log(otp);
+console.log(sessionToken);
+```
+
+## Production Principle
+
+Logs should provide enough information to understand what happened without exposing credentials or authentication secrets.
+
+Logging is considered part of the task's completion criteria.
+
 # 16. Testing Requirements
 
 Use the two seeded users in your database.
