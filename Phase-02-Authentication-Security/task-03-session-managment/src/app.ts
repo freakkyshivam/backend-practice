@@ -3,6 +3,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import * as pinoHttp from "pino-http";
 import { logger } from './config/logger.js';
+import './config/redis.js'
 
 const app = express();
 

@@ -7,7 +7,6 @@ const startServer = async()=>{
 
 app.listen(PORT, () => {
   logger.info("Server started")
-  console.log(`Server listening at http://localhost:${PORT}`);
 });
 }
 

@@ -1,5 +1,6 @@
 import {Redis} from 'ioredis'
 import { env } from './env.js'
+import { logger } from './logger.js'
 
 export const redis = new Redis({
     host : env.redis.host,
@@ -9,10 +10,9 @@ export const redis = new Redis({
 
 
 redis.on('connect', ()=>{
-    console.log('Redis connected');
+     logger.info("Redis connected")
 })
 
 redis.on('error', (err)=>{
-    console.log("Redis connection error ", err);
-    
+   logger.error({errName : err.name, message : err.message, stack : err.stack, cause : err.cause}, "Redis connection error") 
 })
